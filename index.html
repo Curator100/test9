@@ -1,0 +1,29 @@
+<form id="myForm">
+  <label for="name">Name:</label>
+  <input type="text" id="name" name="Name"><br><br>
+  <label for="roll">Roll:</label>
+  <input type="text" id="roll" name="Roll"><br><br>
+  <label for="history">History:</label>
+  <input type="text" id="history" name="History"><br><br>
+  <button type="button" onclick="submitForm()">Submit</button>
+</form>
+
+<script>
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbyiKFOIWbx_aMvIxRmM77KLuwJo2KwIfrJ_rjiR8eu9iV65Hu_K-nC3H96cQ3k2Au71SQ/exec';
+
+  function submitForm() {
+    const form = document.getElementById('myForm');
+    const formData = new FormData(form);
+
+    fetch(scriptURL, { method: 'POST', body: formData })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Success:', data);
+        alert("Form submitted successfully!");
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert("There was an error submitting the form.");
+      });
+  }
+</script>
